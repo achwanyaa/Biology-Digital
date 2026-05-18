@@ -6,10 +6,10 @@ import { useRef, useState } from "react";
 import { ThreeEvent } from "@react-three/fiber";
 import { Text, Sphere } from "@react-three/drei";
 import * as THREE from "three";
-import { ComponentNode } from "@/types/biology";
+import { HotspotNode } from "@/types/biology";
 
 interface Props {
-  node: ComponentNode;
+  node: HotspotNode;
   isActive: boolean;
   onSelect: (id: string) => void;
 }
@@ -48,7 +48,7 @@ export default function NodeMesh({ node, isActive, onSelect }: Props) {
       }}
     >
       {/* Main sphere */}
-      <Sphere ref={meshRef} args={[0.6, 32, 32]} scale={scale}>
+      <Sphere ref={meshRef} args={[0.3, 32, 32]} scale={scale}>
         <meshStandardMaterial
           color={displayColor}
           roughness={0.35}
@@ -61,7 +61,7 @@ export default function NodeMesh({ node, isActive, onSelect }: Props) {
       {/* Active ring */}
       {isActive && (
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.85, 0.04, 8, 48]} />
+          <torusGeometry args={[0.45, 0.02, 8, 48]} />
           <meshStandardMaterial
             color={node.color}
             emissive={node.color}
@@ -72,8 +72,8 @@ export default function NodeMesh({ node, isActive, onSelect }: Props) {
 
       {/* Label */}
       <Text
-        position={[0, -1.05, 0]}
-        fontSize={0.22}
+        position={[0, -0.6, 0]}
+        fontSize={0.18}
         color={hovered || isActive ? "#f8fafc" : "#94a3b8"}
         anchorX="center"
         anchorY="middle"

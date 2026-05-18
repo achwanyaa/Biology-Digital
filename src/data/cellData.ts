@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  Static data: cell entities & components
+//  Static data: cell entities & hotspots
 // ─────────────────────────────────────────────
 import { CellEntity } from "@/types/biology";
 
@@ -12,7 +12,8 @@ export const CELL_ENTITIES: CellEntity[] = [
       "A neuron is an electrically excitable cell that transmits nerve impulses across synapses to communicate with other cells.",
     category: "neuron",
     color: "#6366f1",
-    components: [
+    modelPath: "/models/neuron.glb",
+    hotspots: [
       {
         id: "soma",
         label: "Soma (Cell Body)",
@@ -75,7 +76,8 @@ export const CELL_ENTITIES: CellEntity[] = [
       "Skeletal muscle fibers are long, multinucleated cells capable of rapid contraction powered by ATP hydrolysis.",
     category: "animal",
     color: "#f43f5e",
-    components: [
+    modelPath: "/models/muscle.glb",
+    hotspots: [
       {
         id: "sarcomere",
         label: "Sarcomere",
@@ -138,7 +140,8 @@ export const CELL_ENTITIES: CellEntity[] = [
       "Plant cells are eukaryotic cells distinguished by a rigid cell wall, central vacuole, and chloroplasts that drive photosynthesis.",
     category: "plant",
     color: "#22c55e",
-    components: [
+    modelPath: "/models/plant.glb",
+    hotspots: [
       {
         id: "chloroplast",
         label: "Chloroplast",

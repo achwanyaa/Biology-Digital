@@ -38,7 +38,7 @@ export default function RightSidebar() {
 
           <div className="detail-components-list">
             <p className="detail-sub-label">Components</p>
-            {activeEntity.components.map((c) => (
+            {activeEntity.hotspots.map((c) => (
               <div key={c.id} className="detail-component-chip">
                 <span
                   className="chip-swatch"

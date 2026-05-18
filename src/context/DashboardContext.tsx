@@ -9,12 +9,12 @@ import React, {
   useCallback,
   ReactNode,
 } from "react";
-import { CellEntity, ComponentNode } from "@/types/biology";
+import { CellEntity, HotspotNode } from "@/types/biology";
 import { CELL_ENTITIES } from "@/data/cellData";
 
 interface DashboardState {
   activeEntity: CellEntity;
-  activeComponent: ComponentNode | null;
+  activeComponent: HotspotNode | null;
   setActiveEntityById: (id: string) => void;
   setActiveComponentById: (id: string | null) => void;
 }
@@ -26,7 +26,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     CELL_ENTITIES[0]
   );
   const [activeComponent, setActiveComponent] =
-    useState<ComponentNode | null>(null);
+    useState<HotspotNode | null>(null);
 
   const setActiveEntityById = useCallback((id: string) => {
     const entity = CELL_ENTITIES.find((e) => e.id === id);
@@ -42,7 +42,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
         setActiveComponent(null);
         return;
       }
-      const node = activeEntity.components.find((c) => c.id === id) ?? null;
+      const node = activeEntity.hotspots.find((c) => c.id === id) ?? null;
       setActiveComponent(node);
     },
     [activeEntity]

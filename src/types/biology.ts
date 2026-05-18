@@ -7,11 +7,12 @@ export interface CellEntity {
   label: string;
   description: string;
   category: "animal" | "plant" | "neuron";
-  color: string; // hex color used for 3-D mesh
-  components: ComponentNode[];
+  color: string; // hex color used for UI accents
+  modelPath: string; // path to the .glb/.gltf asset
+  hotspots: HotspotNode[];
 }
 
-export interface ComponentNode {
+export interface HotspotNode {
   id: string;
   label: string;
   position: [number, number, number];
