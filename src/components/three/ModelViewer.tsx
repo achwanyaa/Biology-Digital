@@ -3,8 +3,8 @@
 //  ModelViewer – dynamically loads .glb assets
 // ─────────────────────────────────────────────
 import { useEffect, useState } from "react";
-import { useGLTF } from "@react-three/drei";
-import { ThreeEvent } from "@react-three/fiber";
+import { useLoader, ThreeEvent } from "@react-three/fiber";
+import { GLTFLoader } from "three-stdlib";
 import * as THREE from "three";
 
 interface Props {
@@ -25,7 +25,9 @@ export default function ModelViewer({ modelPath }: Props) {
   let gltf: any = null;
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    gltf = useGLTF(modelPath);
+    gltf = useLoader(GLTFLoader, modelPath, (loader) => {
+      loader.setWithCredentials(true);
+    });
   } catch (err: any) {
     // If it's a Promise, it's Suspense. Rethrow it!
     if (err && typeof err.then === "function") {
@@ -36,25 +38,6 @@ export default function ModelViewer({ modelPath }: Props) {
       setError(err);
     }
   }
-
-  // Ensure materials properly clean up on unmount to prevent memory leaks
-  useEffect(() => {
-    return () => {
-      if (gltf && gltf.scene) {
-        gltf.scene.traverse((child: THREE.Object3D) => {
-          if ((child as THREE.Mesh).isMesh) {
-            const mesh = child as THREE.Mesh;
-            mesh.geometry.dispose();
-            if (Array.isArray(mesh.material)) {
-              mesh.material.forEach((mat) => mat.dispose());
-            } else if (mesh.material) {
-              mesh.material.dispose();
-            }
-          }
-        });
-      }
-    };
-  }, [gltf]);
 
   if (error || !gltf) {
     return (
@@ -83,7 +66,3 @@ export default function ModelViewer({ modelPath }: Props) {
   );
 }
 
-// Preload common models to improve switching performance
-useGLTF.preload("/models/neuron.glb");
-useGLTF.preload("/models/muscle.glb");
-useGLTF.preload("/models/plant.glb");
