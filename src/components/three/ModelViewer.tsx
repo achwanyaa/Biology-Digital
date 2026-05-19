@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────
 import { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface Props {
@@ -71,6 +72,13 @@ export default function ModelViewer({ modelPath }: Props) {
       position={[0, 0, 0]}
       castShadow
       receiveShadow
+      onClick={(event: ThreeEvent<MouseEvent>) => {
+        event.stopPropagation();
+        const { x, y, z } = event.point;
+        console.log(
+          `📍 Clicked Coordinate: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`
+        );
+      }}
     />
   );
 }

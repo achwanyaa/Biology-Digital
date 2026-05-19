@@ -1,0 +1,12 @@
+{
+  "name": "model-gen",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate": "node generate-models.mjs"
+  },
+  "dependencies": {
+    "three": "^0.169.0",
+    "three-stdlib": "^2.33.0"
+  }
+}
